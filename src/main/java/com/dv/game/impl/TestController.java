@@ -2,7 +2,6 @@ package com.dv.game.impl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityManager;
@@ -18,18 +17,13 @@ public class TestController {
     EntityManager em;
 
     @RequestMapping(value = "/a", method = GET)
-    public String test(Model model) {
-
-        model.addAttribute("model", new Location("Asia/Tokyo"));
+    public String test() {
 
         return "test";
     }
 
     @RequestMapping(value = "/b", method = GET)
     public String b() {
-
-        Location alpha1 = new Location("Alpha");
-        em.persist(alpha1);
 
         return "test";
     }
