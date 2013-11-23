@@ -1,4 +1,4 @@
-package com.dv.date.impl;
+package com.dv.game.impl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
