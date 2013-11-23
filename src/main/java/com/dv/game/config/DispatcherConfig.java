@@ -1,4 +1,4 @@
-package com.dv.date.config;
+package com.dv.game.config;
 
 import org.fusesource.scalate.spring.view.ScalateViewResolver;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.dv.date")
+@ComponentScan("com.dv.game")
 @EnableTransactionManagement
 public class DispatcherConfig {
 
