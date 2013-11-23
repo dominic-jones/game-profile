@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <display-name>Date Service Web Application</display-name>
+    <display-name>Game Profile Web Application</display-name>
 
     <persistence-unit-ref>
         <persistence-unit-ref-name>persistence/persistenceUnit</persistence-unit-ref-name>

@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dv.game</groupId>
-    <artifactId>game-test</artifactId>
+    <artifactId>game-profile</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
-    <name>Game Test</name>
-    <description>Game Test</description>
+    <name>Game Profile</name>
+    <description>Game Profile</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
