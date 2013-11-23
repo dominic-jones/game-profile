@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <com.fasterxml.jackson.version>2.2.3</com.fasterxml.jackson.version>
+        <org.fusesource.scalate.version>1.6.1</org.fusesource.scalate.version>
         <org.glassfish.version>4.0</org.glassfish.version>
         <org.hibernate.orm.version>4.3.0.Beta5</org.hibernate.orm.version>
         <org.jboss.resteasy.version>3.0.5.Final</org.jboss.resteasy.version>
@@ -45,19 +46,19 @@
         <dependency>
             <groupId>org.fusesource.scalate</groupId>
             <artifactId>scalate-wikitext_2.10</artifactId>
-            <version>1.6.1</version>
+            <version>${org.fusesource.scalate.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fusesource.scalate</groupId>
             <artifactId>scalate-page_2.10</artifactId>
-            <version>1.6.1</version>
+            <version>${org.fusesource.scalate.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fusesource.scalate</groupId>
             <artifactId>scalate-spring-mvc_2.10</artifactId>
-            <version>1.6.1</version>
+            <version>${org.fusesource.scalate.version}</version>
         </dependency>
 
         <!--Spring-->
@@ -166,13 +167,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax.ejb-api</artifactId>
-            <version>3.2</version>
             <scope>provided</scope>
         </dependency>
 
