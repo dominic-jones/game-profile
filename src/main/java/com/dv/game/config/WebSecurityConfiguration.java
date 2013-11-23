@@ -1,4 +1,4 @@
-package com.dv.date.config;
+package com.dv.game.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
