@@ -15,7 +15,11 @@ public class ApplicationInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext container) throws ServletException {
 
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(ApplicationConfig.class);
+        //TODO 2013-11-23 Dom - Add annotation scanner for all config classes
+        applicationContext.register(
+                ApplicationConfig.class,
+                WebSecurityConfiguration.class
+        );
 
         container.addListener(new ContextLoaderListener(applicationContext));
 

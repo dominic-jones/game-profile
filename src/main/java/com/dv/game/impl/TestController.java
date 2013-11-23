@@ -27,4 +27,11 @@ public class TestController {
 
         return "test";
     }
+
+    //TODO 2013-11-23 Dom - Temporary
+    @RequestMapping(value = "/login", method = GET)
+    public String login() {
+
+        return "login";
+    }
 }

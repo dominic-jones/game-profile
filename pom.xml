@@ -19,6 +19,7 @@
         <org.hibernate.orm.version>4.3.0.Beta5</org.hibernate.orm.version>
         <org.jboss.resteasy.version>3.0.5.Final</org.jboss.resteasy.version>
         <org.springframework.version>3.2.5.RELEASE</org.springframework.version>
+        <org.springframework.security.version>3.2.0.RC2</org.springframework.security.version>
     </properties>
 
     <dependencyManagement>
@@ -59,6 +60,7 @@
             <version>1.6.1</version>
         </dependency>
 
+        <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -83,6 +85,26 @@
             <version>${org.springframework.version}</version>
         </dependency>
 
+        <!--Spring Security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
+
+        <!--Other-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -384,4 +406,11 @@
         </profile>
     </profiles>
 
+    <repositories>
+        <repository>
+            <id>repository.springsource.milestone</id>
+            <name>SpringSource Milestone Repository</name>
+            <url>http://repo.springsource.org/milestone</url>
+        </repository>
+    </repositories>
 </project>
