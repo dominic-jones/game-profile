@@ -16,8 +16,6 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan("com.dv.game")
 @EnableTransactionManagement
 public class DispatcherConfig {
 

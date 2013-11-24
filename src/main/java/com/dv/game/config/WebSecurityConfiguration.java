@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.inject.Inject;
 
@@ -15,17 +16,11 @@ public class WebSecurityConfiguration
         extends WebSecurityConfigurerAdapter {
 
     @Inject
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth,
+                                UserDetailsService userDetailsService) throws Exception {
 
         auth
-                .inMemoryAuthentication()
-                .withUser("user")
-                .password("password")
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password("password")
-                .roles("ADMIN", "USER");
+                .userDetailsService(userDetailsService);
     }
 
     @Override
