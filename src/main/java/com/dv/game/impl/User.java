@@ -2,17 +2,17 @@ package com.dv.game.impl;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.annotation.Nullable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Collection;
+import java.util.UUID;
 
+import static com.fasterxml.uuid.Generators.timeBasedGenerator;
 import static com.google.common.base.Splitter.on;
 import static com.google.common.collect.ImmutableList.copyOf;
 import static com.google.common.collect.Iterables.transform;
@@ -21,9 +21,7 @@ import static com.google.common.collect.Iterables.transform;
 public class User implements UserDetails {
 
     @Id
-    @GenericGenerator(name = "table-hilo-generator", strategy = "org.hibernate.id.TableHiLoGenerator")
-    @GeneratedValue(generator = "table-hilo-generator")
-    private Long id;
+    private UUID id;
 
     private String userName;
     private String password;
@@ -31,15 +29,22 @@ public class User implements UserDetails {
 
     protected User() {
 
+        id = timeBasedGenerator().generate();
     }
 
     public User(String userName,
                 String password,
                 Iterable<GrantedAuthority> authorities) {
 
+        this();
         this.userName = userName;
         this.password = password;
         this.tempAuthorities = Iterables.toString(authorities);
+    }
+
+    public UUID getId() {
+
+        return id;
     }
 
     @Override
