@@ -2,12 +2,9 @@ package com.dv.game.config;
 
 import org.fusesource.scalate.spring.view.ScalateViewResolver;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.naming.Context;
@@ -16,7 +13,6 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-@EnableTransactionManagement
 public class DispatcherConfig {
 
     @Bean
