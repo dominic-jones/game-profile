@@ -387,6 +387,9 @@
                             <app>target/${project.artifactId}-${project.version}.war</app>
                             <port>9090</port>
                             <contextRoot>${project.artifactId}</contextRoot>
+                            <systemProperties>
+                                <property>java.util.logging.config.file=log.properties</property>
+                            </systemProperties>
                         </configuration>
                         <dependencies>
                             <dependency>
