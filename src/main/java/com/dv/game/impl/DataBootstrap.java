@@ -31,12 +31,10 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
         Iterable<GrantedAuthority> roles = Lists.<GrantedAuthority>newArrayList(new SimpleGrantedAuthority("ROLE_USER"));
         User user = new User("user", "password", roles);
-        System.out.println("@@@: " + user.getId());
         em.persist(user);
 
         roles = Lists.<GrantedAuthority>newArrayList(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"));
         user = new User("admin", "password", roles);
-        System.out.println("@@@: " + user.getId());
         em.persist(user);
     }
 }
