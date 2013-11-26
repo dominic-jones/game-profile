@@ -1,5 +1,6 @@
-package com.dv.game.impl;
+package com.dv.game.bootstrap;
 
+import com.dv.game.user.User;
 import com.google.common.base.Function;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

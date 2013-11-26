@@ -1,4 +1,4 @@
-package com.dv.game.impl;
+package com.dv.game.register;
 
 public class RegisterEditModel {
 

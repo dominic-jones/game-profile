@@ -1,4 +1,4 @@
-package com.dv.game.impl;
+package com.dv.game.user;
 
 import com.google.common.base.Optional;
 import org.springframework.stereotype.Repository;

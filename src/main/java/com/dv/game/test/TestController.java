@@ -1,4 +1,4 @@
-package com.dv.game.impl;
+package com.dv.game.test;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

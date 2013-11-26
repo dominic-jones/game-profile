@@ -1,5 +1,7 @@
-package com.dv.game.impl;
+package com.dv.game.register;
 
+import com.dv.game.user.User;
+import com.dv.game.user.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;

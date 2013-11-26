@@ -1,4 +1,4 @@
-package com.dv.game.impl;
+package com.dv.game.user;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
