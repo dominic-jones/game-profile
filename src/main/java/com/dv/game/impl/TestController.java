@@ -18,17 +18,11 @@ public class TestController {
     @PersistenceContext(unitName = "persistenceUnit")
     EntityManager em;
 
-    @RequestMapping(value = "/a", method = GET)
+    @RequestMapping(value = "/test", method = GET)
     public String test(Principal principal,
                        Model model) {
 
         model.addAttribute("username", principal.getName());
-
-        return "test";
-    }
-
-    @RequestMapping(value = "/b", method = GET)
-    public String b() {
 
         return "test";
     }
