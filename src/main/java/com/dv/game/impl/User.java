@@ -21,10 +21,11 @@ import static com.google.common.collect.Iterables.transform;
 public class User implements UserDetails {
 
     @Id
-    private UUID id;
+    private final UUID id;
 
-    private String userName;
+    private String username;
     private String password;
+    //TODO 2013-11-26 Dom - This should be a mapping to some other role entity
     private String tempAuthorities;
 
     protected User() {
@@ -32,13 +33,21 @@ public class User implements UserDetails {
         id = timeBasedGenerator().generate();
     }
 
-    public User(String userName,
+    //TODO 2013-11-26 Dom - Replace daisy-chained constructors with builder or auto-mapper
+    public User(String username,
+                String password) {
+
+        this();
+        this.username = username;
+        this.password = password;
+        this.tempAuthorities = "ROLE_USER";
+    }
+
+    public User(String username,
                 String password,
                 Iterable<GrantedAuthority> authorities) {
 
-        this();
-        this.userName = userName;
-        this.password = password;
+        this(username, password);
         this.tempAuthorities = Iterables.toString(authorities);
     }
 
@@ -74,7 +83,7 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
 
-        return userName;
+        return username;
     }
 
     @Override

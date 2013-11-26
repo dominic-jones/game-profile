@@ -19,14 +19,14 @@ public class UserRepository {
     @PersistenceContext
     private EntityManager em;
 
-    Optional<User> findUserByName(String userName) {
+    public Optional<User> findUserByName(String username) {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         CriteriaQuery<User> query = cb.createQuery(User.class);
         Root<User> rUser = query.from(User.class);
         query.select(rUser)
-                .where(cb.equal(rUser.get("userName"), userName));
+                .where(cb.equal(rUser.get("username"), username));
 
         Iterable<User> results = em.createQuery(query)
                 .getResultList();
@@ -38,4 +38,8 @@ public class UserRepository {
         }
     }
 
+    public void createUser(User user) {
+
+        em.persist(user);
+    }
 }

@@ -17,19 +17,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Inject
     private UserRepository userRepository;
 
-    public UserDetails loadUserByUsername(String userName)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException, DataAccessException {
 
-        Optional<User> user = getUser(userName);
+        Optional<User> user = getUser(username);
 
         if (!user.isPresent()) {
-            throw new UsernameNotFoundException("User not found: " + userName);
+            throw new UsernameNotFoundException("User not found: " + username);
         }
         return user.get();
     }
 
-    private Optional<User> getUser(String userName) {
+    private Optional<User> getUser(String username) {
 
-        return userRepository.findUserByName(userName);
+        return userRepository.findUserByName(username);
     }
 }

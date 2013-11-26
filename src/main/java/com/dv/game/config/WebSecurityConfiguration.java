@@ -36,7 +36,7 @@ public class WebSecurityConfiguration
 
         http
                 .authorizeRequests()
-                .antMatchers("/test/signup", "/about").permitAll()
+                .antMatchers("/test/register").permitAll()
                 .antMatchers("/test/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 

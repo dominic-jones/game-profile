@@ -47,12 +47,12 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         user("admin", "password", asList("ROLE_USER", "ROLE_ADMIN"));
     }
 
-    private void user(String userName,
+    private void user(String username,
                       String password,
                       Iterable<String> roles) {
 
         Iterable<GrantedAuthority> authorities = roles(roles);
-        User user = new User(userName, password, authorities);
+        User user = new User(username, password, authorities);
         em.persist(user);
     }
 
