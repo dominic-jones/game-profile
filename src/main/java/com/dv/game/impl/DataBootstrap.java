@@ -1,6 +1,6 @@
 package com.dv.game.impl;
 
-import com.google.common.collect.Lists;
+import com.google.common.base.Function;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,8 +8,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import static com.google.common.collect.Iterables.transform;
+import static java.util.Arrays.asList;
 
 @Component
 @Transactional
@@ -17,6 +21,15 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
     @PersistenceContext
     private EntityManager em;
+
+    private static Function<String, GrantedAuthority> toAuthority = new Function<String, GrantedAuthority>() {
+        @Nullable
+        @Override
+        public GrantedAuthority apply(@Nullable String input) {
+
+            return new SimpleGrantedAuthority(input);
+        }
+    };
 
     /*
      * Temporary data bootstrapping.
@@ -29,12 +42,23 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        Iterable<GrantedAuthority> roles = Lists.<GrantedAuthority>newArrayList(new SimpleGrantedAuthority("ROLE_USER"));
-        User user = new User("user", "password", roles);
-        em.persist(user);
+        user("user", "password", asList("ROLE_USER"));
 
-        roles = Lists.<GrantedAuthority>newArrayList(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"));
-        user = new User("admin", "password", roles);
+        user("admin", "password", asList("ROLE_USER", "ROLE_ADMIN"));
+    }
+
+    private void user(String userName,
+                      String password,
+                      Iterable<String> roles) {
+
+        Iterable<GrantedAuthority> authorities = roles(roles);
+        User user = new User(userName, password, authorities);
         em.persist(user);
     }
+
+    private static Iterable<GrantedAuthority> roles(Iterable<String> roles) {
+
+        return transform(roles, toAuthority);
+    }
+
 }
