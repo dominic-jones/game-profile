@@ -37,7 +37,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
      * This needs to be an ApplicationListener<ContextRefreshedEvent> so that all beans are loaded and initialised before
      * this executes, to take advantage of transaction support etc.
      *
-     * An @PostConstruct method would be preferred, but it seems at that time it runs, all of Spring is not yet loaded.
+     * An @PostConstruct method would be preferred, but it seems that at that time it runs, all of Spring is not yet loaded.
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
