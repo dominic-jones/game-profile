@@ -31,7 +31,7 @@ public class DispatcherConfig {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setOrder(2);
         resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".html");
+        resolver.setSuffix(".jsp");
         return resolver;
     }
 

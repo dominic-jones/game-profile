@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
@@ -29,7 +30,7 @@ public class RegisterController {
     }
 
     @RequestMapping(method = POST)
-    public String register(@Valid RegisterEditModel editModel,
+    public String register(@ModelAttribute("command") @Valid RegisterEditModel editModel,
                            BindingResult result) {
 
         System.out.println("@@@");

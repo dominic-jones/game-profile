@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class RegisterEditModel {
 
     @NotNull
-    @Length(min = 5)
+    @Length(min = 4)
     private String username;
 
     @NotNull
