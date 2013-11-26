@@ -1,8 +1,17 @@
 package com.dv.game.register;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+
 public class RegisterEditModel {
 
+    @NotNull
+    @Length(min = 5)
     private String username;
+
+    @NotNull
+    @Length(min = 8)
     private String password;
 
     public String getUsername() {

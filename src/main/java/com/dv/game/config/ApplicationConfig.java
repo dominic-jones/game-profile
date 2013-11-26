@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.naming.Context;
@@ -30,5 +31,11 @@ public class ApplicationConfig {
     PlatformTransactionManager transactionManager() {
 
         return new JtaTransactionManager();
+    }
+
+    @Bean
+    LocalValidatorFactoryBean localValidatorFactoryBean() {
+
+        return new LocalValidatorFactoryBean();
     }
 }
