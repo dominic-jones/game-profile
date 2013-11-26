@@ -19,7 +19,7 @@
         <org.glassfish.version>4.0</org.glassfish.version>
         <org.hibernate.orm.version>4.3.0.Beta5</org.hibernate.orm.version>
         <org.jboss.resteasy.version>3.0.5.Final</org.jboss.resteasy.version>
-        <org.springframework.version>3.2.5.RELEASE</org.springframework.version>
+        <org.springframework.version>4.0.0.RC1</org.springframework.version>
         <org.springframework.security.version>3.2.0.RC2</org.springframework.security.version>
     </properties>
 
