@@ -1,6 +1,5 @@
 package com.dv.game.config;
 
-import org.fusesource.scalate.spring.view.ScalateViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -16,20 +15,9 @@ import javax.persistence.EntityManagerFactory;
 public class DispatcherConfig {
 
     @Bean
-    ScalateViewResolver scalateViewResolver() {
-
-        ScalateViewResolver resolver = new ScalateViewResolver();
-        resolver.setOrder(1);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".scaml");
-        return resolver;
-    }
-
-    @Bean
     InternalResourceViewResolver internalResourceViewResolver() {
 
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setOrder(2);
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
