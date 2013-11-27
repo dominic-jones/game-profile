@@ -177,14 +177,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--TODO Probably do not need this-->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.1-20130918</version>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
