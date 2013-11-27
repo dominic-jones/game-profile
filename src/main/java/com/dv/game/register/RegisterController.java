@@ -2,7 +2,6 @@ package com.dv.game.register;
 
 import com.dv.game.user.User;
 import com.dv.game.user.UserRepository;
-import com.google.common.collect.Iterables;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -33,12 +32,6 @@ public class RegisterController {
     public String register(@ModelAttribute("command") @Valid RegisterEditModel editModel,
                            BindingResult result) {
 
-        System.out.println("@@@");
-        System.out.println(result.getErrorCount());
-        System.out.println(result.getFieldError("username"));
-        System.out.println(Iterables.toString(result.getFieldErrors()));
-        System.out.println(Iterables.toString(result.getAllErrors()));
-
         if (result.hasErrors()) {
             return "register";
         }
@@ -46,8 +39,14 @@ public class RegisterController {
         //TODO 2013-11-26 Dom - build the User better, perhaps through auto-mapper
         userRepository.createUser(new User(editModel.getUsername(), editModel.getPassword()));
 
-        //TODO 2013-11-26 Dom - Make SpringSecurity log in the user after registering
+        //TODO 2013-11-26 Dom - Make SpringSecurity login the user after registering
 
         return "redirect:test";
+    }
+
+    @ModelAttribute("command")
+    public RegisterEditModel command() {
+
+        return new RegisterEditModel();
     }
 }

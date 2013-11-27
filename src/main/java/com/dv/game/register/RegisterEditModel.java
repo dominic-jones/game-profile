@@ -7,10 +7,12 @@ import javax.validation.constraints.NotNull;
 public class RegisterEditModel {
 
     @NotNull
-    @Length(min = 4)
-    private String username;
+    //TODO 2013-11-27 Dom - Length is temporary, only here to spike bean validation
+    @Length(min = 4, max = 10)
+    public String username;
 
     @NotNull
+    //TODO 2013-11-27 Dom - Length is temporary, only here to spike bean validation
     @Length(min = 8)
     private String password;
 
