@@ -379,7 +379,10 @@
                         </executions>
                         <configuration>
                             <app>target/${project.artifactId}-${project.version}.war</app>
-                            <port>9090</port>
+                            <ports>
+                                <http-listener>9090</http-listener>
+                                <https-listener>9191</https-listener>
+                            </ports>
                             <contextRoot>${project.artifactId}</contextRoot>
                             <systemProperties>
                                 <property>java.util.logging.config.file=log.properties</property>
