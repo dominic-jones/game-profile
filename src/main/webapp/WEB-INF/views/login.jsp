@@ -7,16 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css">
 </head>
 
 <body>
-<div id="login-form">
+<form:form method="POST">
     <h2>Login</h2>
-    <form:form method="POST" cssClass="login-form">
-        <dv:textbox path="username" text="Username"/>
-        <dv:password path="password" text="Password"/>
-        <button type="submit">Login</button>
-    </form:form>
-</div>
+    <dv:textbox path="username" text="Username" autocomplete="off" autofocus="autofocus"/>
+    <dv:password path="password" text="Password"/>
+    <button type="submit">Login</button>
+</form:form>
 </body>
 </html>

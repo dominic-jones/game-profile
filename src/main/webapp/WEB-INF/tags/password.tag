@@ -4,6 +4,6 @@
 <%@attribute name="text" required="true" %>
 <div>
     <label for="${path}">${text}</label>
-    <input name="${path}" type="password">
+    <form:password path="${path}" autocomplete="off" placeholder="${text}"/>
     <form:errors path="${path}"/>
 </div>

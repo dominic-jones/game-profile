@@ -7,16 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/global.css">
 </head>
 
 <body>
-<div id="register-form">
+<form:form method="POST">
     <h2>Register</h2>
-    <form:form method="POST">
-        <dv:textbox path="username" text="Username"/>
-        <dv:password path="password" text="Password"/>
-        <button type="submit">Register</button>
-    </form:form>
-</div>
+    <dv:textbox path="username" text="Username" autocomplete="autocomplete" autofocus="autofocus"/>
+    <dv:password path="password" text="Password"/>
+    <button type="submit">Register</button>
+</form:form>
 </body>
 </html>
