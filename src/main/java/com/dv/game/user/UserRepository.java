@@ -21,14 +21,21 @@ public class UserRepository {
 
     public Optional<User> findUserByName(String username) {
 
+        //Named queries are slightly more optimal than criteria as they are preparsed
+        //TODO 2013-11-29 Dom - Consider providing access to Criteria through injection
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
-        CriteriaQuery<User> query = cb.createQuery(User.class);
-        Root<User> rUser = query.from(User.class);
-        query.select(rUser)
+        CriteriaQuery<User> qUser = cb.createQuery(User.class);
+        Root<User> rUser = qUser.from(User.class);
+
+        //TODO 2013-11-29 Dom - Consider applying Metamodel preparsing
+        //The predicate is not refactor/type-safe, but this can be fixed through the metamodel plugin
+        qUser.select(rUser)
                 .where(cb.equal(rUser.get("username"), username));
 
-        Iterable<User> results = em.createQuery(query)
+        //getResultList() might be considered overkill for a single result, however, it is more comfortable to handle
+        //our own 'not found' case than the exception thrown by getSingleResult().
+        Iterable<User> results = em.createQuery(qUser)
                 .getResultList();
 
         if (isEmpty(results)) {
