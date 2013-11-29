@@ -4,12 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.jta.JtaTransactionManager;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
+
+import static org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform.TM_NAME;
 
 @Configuration
 public class DispatcherConfig {
@@ -31,8 +34,14 @@ public class DispatcherConfig {
     }
 
     @Bean
-    PlatformTransactionManager transactionManager() {
+    PlatformTransactionManager transactionManager() throws NamingException {
 
-        return new JtaTransactionManager();
+        JtaTransactionManager jtaTransactionManager = new JtaTransactionManager();
+
+        //The JtaTransactionManager does its own job checking common locations for various app servers. This causes an error on startup
+        //as it checks invalid locations, so specifying it here.
+        jtaTransactionManager.setTransactionManagerName(TM_NAME);
+
+        return jtaTransactionManager;
     }
 }
