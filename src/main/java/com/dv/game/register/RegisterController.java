@@ -2,6 +2,7 @@ package com.dv.game.register;
 
 import com.dv.game.user.User;
 import com.dv.game.user.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,9 @@ public class RegisterController {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(method = GET)
     public String form() {
 
@@ -37,7 +41,8 @@ public class RegisterController {
         }
 
         //TODO 2013-11-26 Dom - build the User better, perhaps through auto-mapper
-        userRepository.createUser(new User(editModel.getUsername(), editModel.getPassword()));
+        //TODO 2013-11-29 Dom - PasswordEncoder should not be here, not a controller task
+        userRepository.createUser(new User(editModel.getUsername(), passwordEncoder.encode(editModel.getPassword())));
 
         //TODO 2013-11-26 Dom - Make SpringSecurity login the user after registering
 

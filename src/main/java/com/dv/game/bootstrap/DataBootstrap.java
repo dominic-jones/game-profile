@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ import static java.util.Arrays.asList;
 @Component
 @Transactional
 public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     @Inject
     private UserRepository userRepository;
@@ -59,7 +63,8 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
                       Iterable<String> roles) {
 
         Iterable<GrantedAuthority> authorities = roles(roles);
-        User user = new User(username, password, authorities);
+        //TODO 2013-11-29 Dom - This follows a different logical flow to creating users through register. Fix this.
+        User user = new User(username, passwordEncoder.encode(password), authorities);
         userRepository.createUser(user);
     }
 

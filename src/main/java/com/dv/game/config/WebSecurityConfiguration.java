@@ -1,6 +1,7 @@
 package com.dv.game.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -17,10 +18,9 @@ public class WebSecurityConfiguration
 
     @Inject
     public void configureGlobal(AuthenticationManagerBuilder auth,
-                                UserDetailsService userDetailsService) throws Exception {
+                                AuthenticationProvider authenticationProvider) throws Exception {
 
-        auth
-                .userDetailsService(userDetailsService);
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
