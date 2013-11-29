@@ -1,6 +1,7 @@
 package com.dv.game.bootstrap;
 
 import com.dv.game.user.User;
+import com.dv.game.user.UserRepository;
 import com.google.common.base.Function;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -10,8 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nullable;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 
 import static com.google.common.collect.Iterables.transform;
 import static java.util.Arrays.asList;
@@ -20,8 +20,8 @@ import static java.util.Arrays.asList;
 @Transactional
 public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    @PersistenceContext
-    private EntityManager em;
+    @Inject
+    private UserRepository userRepository;
 
     private static Function<String, GrantedAuthority> toAuthority = new Function<String, GrantedAuthority>() {
         @Nullable
@@ -43,7 +43,13 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        user("user", "password", asList("ROLE_USER"));
+        //Prevent double bootstrap
+        String systemUserName = "user";
+        if (userRepository.findUserByName(systemUserName).isPresent()) {
+            return;
+        }
+
+        user(systemUserName, "password", asList("ROLE_USER"));
 
         user("admin", "password", asList("ROLE_USER", "ROLE_ADMIN"));
     }
@@ -54,12 +60,11 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
         Iterable<GrantedAuthority> authorities = roles(roles);
         User user = new User(username, password, authorities);
-        em.persist(user);
+        userRepository.createUser(user);
     }
 
     private static Iterable<GrantedAuthority> roles(Iterable<String> roles) {
 
         return transform(roles, toAuthority);
     }
-
 }
