@@ -12,10 +12,12 @@
 
 <body>
 <form:form method="POST">
-    <h2>Register</h2>
-    <dv:textbox path="username" text="Username" autocomplete="autocomplete" autofocus="autofocus"/>
-    <dv:password path="password" text="Password"/>
-    <button type="submit">Register</button>
+    <fieldset>
+        <legend>Register</legend>
+        <dv:textbox path="username" text="Username" autocomplete="autocomplete" autofocus="autofocus"/>
+        <dv:password path="password" text="Password"/>
+        <button type="submit">Register</button>
+    </fieldset>
 </form:form>
 </body>
 </html>
