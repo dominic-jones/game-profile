@@ -44,4 +44,10 @@ public class DispatcherConfig {
 
         return jtaTransactionManager;
     }
+
+    @Bean
+    LocalValidatorFactoryBean localValidatorFactoryBean() {
+
+        return new LocalValidatorFactoryBean();
+    }
 }
