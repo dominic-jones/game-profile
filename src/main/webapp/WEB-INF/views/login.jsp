@@ -13,6 +13,7 @@
 <body>
 <form:form method="POST">
     <h2>Login</h2>
+    <form:errors/>
     <dv:textbox path="username" text="Username" autocomplete="off" autofocus="autofocus"/>
     <dv:password path="password" text="Password"/>
     <button type="submit">Login</button>
