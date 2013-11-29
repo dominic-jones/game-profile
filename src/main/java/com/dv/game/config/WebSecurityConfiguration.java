@@ -44,6 +44,15 @@ public class WebSecurityConfiguration
                 .formLogin()
                 .defaultSuccessUrl("/test/test")
                 .loginPage("/test/login")
-                .permitAll();
+                .permitAll()
+
+                .and()
+                .portMapper()
+                .http(9090).mapsTo(9191)
+
+                .and()
+                .requiresChannel()
+                .anyRequest()
+                .requiresSecure();
     }
 }
