@@ -27,7 +27,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     @Inject
     private UserRepository userRepository;
 
-    private static Function<String, GrantedAuthority> toAuthority = new Function<String, GrantedAuthority>() {
+    private static final Function<String, GrantedAuthority> toAuthority = new Function<String, GrantedAuthority>() {
         @Nullable
         @Override
         public GrantedAuthority apply(@Nullable String input) {
@@ -62,14 +62,10 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
                       String password,
                       Iterable<String> roles) {
 
-        Iterable<GrantedAuthority> authorities = roles(roles);
+        Iterable<GrantedAuthority> authorities = transform(roles, toAuthority);
         //TODO 2013-11-29 Dom - This should follow the exact same flow as the RegisterController.
         User user = new User(username, passwordEncoder.encode(password), authorities);
         userRepository.createUser(user);
     }
 
-    private static Iterable<GrantedAuthority> roles(Iterable<String> roles) {
-
-        return transform(roles, toAuthority);
-    }
 }
