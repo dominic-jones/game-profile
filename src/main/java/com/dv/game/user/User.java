@@ -25,7 +25,7 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
-    //TODO 2013-11-26 Dom - This should be a mapping to some other role entity
+    //TODO 2013-11-26 Dom - This should be a mapping to some other role Entity
     private String tempAuthorities;
 
     protected User() {
@@ -59,6 +59,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
+        //TODO 2013-11-30 Dom - Replace with proper role mappings
         String trimBrackets = tempAuthorities
                 .replaceAll("\\[", "")
                 .replaceAll("]", "");

@@ -15,7 +15,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext container) throws ServletException {
 
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        //TODO 2013-11-23 Dom - Add annotation scanner for all config classes
+        //TODO 2013-11-23 Dom - Add annotation scanner for all config classes, rather than manually specifying
         applicationContext.register(
                 ApplicationConfig.class,
                 WebSecurityConfiguration.class

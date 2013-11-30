@@ -22,6 +22,9 @@ import static org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPl
 @Configuration
 public class DispatcherConfig {
 
+    /*
+     * Basic view configuration.
+     */
     @Bean
     InternalResourceViewResolver internalResourceViewResolver() {
 
@@ -31,6 +34,9 @@ public class DispatcherConfig {
         return resolver;
     }
 
+    /*
+     * Provides access to the PersistenceUnit from the JNDI as a bean.
+     */
     @Bean(name = "persistenceUnit")
     EntityManagerFactory entityManagerFactory() throws NamingException {
 
@@ -38,30 +44,39 @@ public class DispatcherConfig {
         return (EntityManagerFactory) context.lookup("java:comp/env/persistence/persistenceUnit");
     }
 
+    /*
+     * The JtaTransactionManager does its own job checking common locations for various app servers. However, this
+     * causes non-fatal errors on startup as it checks invalid locations.
+     */
     @Bean
     PlatformTransactionManager transactionManager() throws NamingException {
 
         JtaTransactionManager jtaTransactionManager = new JtaTransactionManager();
-
-        //The JtaTransactionManager does its own job checking common locations for various app servers. This causes an error on startup
-        //as it checks invalid locations, so specifying it here.
         jtaTransactionManager.setTransactionManagerName(TM_NAME);
-
         return jtaTransactionManager;
     }
 
+    /*
+     * JSR 303 Bean Validator
+     */
     @Bean
     LocalValidatorFactoryBean localValidatorFactoryBean() {
 
         return new LocalValidatorFactoryBean();
     }
 
+    /*
+     * Provides access to a PasswordEncoder, so we don't store passwords as plain text..
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
 
         return new BCryptPasswordEncoder();
     }
 
+    /*
+     * Configures the Spring AuthenticationProvider with the details it needs to authenticate our users.
+     */
     @Bean
     AuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder,
                                                   UserDetailsService userDetailsService) {

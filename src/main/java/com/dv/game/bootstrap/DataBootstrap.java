@@ -63,7 +63,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
                       Iterable<String> roles) {
 
         Iterable<GrantedAuthority> authorities = roles(roles);
-        //TODO 2013-11-29 Dom - This follows a different logical flow to creating users through register. Fix this.
+        //TODO 2013-11-29 Dom - This should follow the exact same flow as the RegisterController.
         User user = new User(username, passwordEncoder.encode(password), authorities);
         userRepository.createUser(user);
     }

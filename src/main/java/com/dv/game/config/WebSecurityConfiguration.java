@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.inject.Inject;
 
@@ -23,6 +22,10 @@ public class WebSecurityConfiguration
         auth.authenticationProvider(authenticationProvider);
     }
 
+    /*
+     * All requests to the resources folder (css etc) should be ignored by the filters. (This will
+     * still pass secure through https).
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
 
@@ -34,22 +37,27 @@ public class WebSecurityConfiguration
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //All users may register, only admins may admin
+        //All other requests must be authenticated
         http
                 .authorizeRequests()
                 .antMatchers("/test/register").permitAll()
                 .antMatchers("/test/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
+        //Define the login form, accessible by all
         http
                 .formLogin()
                 .defaultSuccessUrl("/test/test")
                 .loginPage("/test/login")
                 .permitAll()
 
+// Map http ports to https
                 .and()
                 .portMapper()
                 .http(9090).mapsTo(9191)
 
+//And ensure all requests use the https channel
                 .and()
                 .requiresChannel()
                 .anyRequest()
