@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException, DataAccessException {
 
-        Optional<User> user = getUser(username);
+        Optional<User> user = userRepository.findUserByName(username);
 
         if (!user.isPresent()) {
             throw new UsernameNotFoundException("User not found: " + username);
@@ -28,8 +28,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return user.get();
     }
 
-    private Optional<User> getUser(String username) {
-
-        return userRepository.findUserByName(username);
-    }
 }
