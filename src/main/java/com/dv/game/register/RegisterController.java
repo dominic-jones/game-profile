@@ -2,10 +2,13 @@ package com.dv.game.register;
 
 import com.dv.game.user.User;
 import com.dv.game.user.UserRepository;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -58,5 +61,11 @@ public class RegisterController {
     public RegisterEditModel command() {
 
         return new RegisterEditModel();
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
     }
 }
