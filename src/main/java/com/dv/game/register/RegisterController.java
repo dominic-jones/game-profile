@@ -40,13 +40,18 @@ public class RegisterController {
             return "register";
         }
 
-        //TODO 2013-11-26 Dom - build the User better, perhaps through auto-mapper
-        //TODO 2013-11-29 Dom - PasswordEncoder should not be here, not a controller task
-        userRepository.createUser(new User(editModel.getUsername(), passwordEncoder.encode(editModel.getPassword())));
+        userRepository.createUser(newUser(editModel));
 
-        //TODO 2013-11-26 Dom - Make SpringSecurity login the user after registering
+        //TODO 2013-11-26 Dom - Make SpringSecurity login the user after registering (and check security implications of this)
 
         return "redirect:test";
+    }
+
+    //TODO 2013-11-26 Dom - build the User better, perhaps through auto-mapper
+    //TODO 2013-11-29 Dom - PasswordEncoder should not be here, not a controller task
+    private User newUser(RegisterEditModel editModel) {
+
+        return new User(editModel.getUsername(), passwordEncoder.encode(editModel.getPassword()));
     }
 
     @ModelAttribute("command")
