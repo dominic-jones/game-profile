@@ -15,6 +15,7 @@ JSP / Tags / Taglib
 HTML 5
 CSS 3
 Glassfish 4.0 (Embedded)
+Groovy / JUnit / Mockito unit tests
 
 ##Versions
 This was built and tested on Java 1.7.0_45-b18. At time of writing, it also builds and runs at source 1.6, but this is by no means guaranteed going forward.
@@ -43,10 +44,10 @@ Once the Glassfish Server has started, there are three main pages in the applica
 The application is also listening on http port 9090, but Spring Security will redirect those requests to https 9191.
 
 ###test/profile
-This is a secured page, requiring the user to log in. Accessing this first will redirect to a login screen.
+This is a secured page, requiring the user to log in. Accessing this first will redirect to a login screen. This will display a list of the user's currently created characters. Characters are currently only created in the bootstrap for testing purposes.
 
 ###test/login
 Allows a user to login. Currently, the user 'user' and the password 'password' are valid.
 
 ###test/register
-Allows a new user to sign up to the system. Also demonstrates JSR303 bean validation if data is not filled in correctly.
+Allows a new user to sign up to the system. Also demonstrates JSR303 bean validation if data is not filled in correctly. Will display an error message if trying to create an account with an existing username. Does not currently log the user in after registering.
