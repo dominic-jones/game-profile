@@ -14,6 +14,7 @@
 <form:form method="POST">
     <fieldset>
         <legend>Register</legend>
+        <form:errors/>
         <dv:textbox path="username" text="Username" autocomplete="autocomplete" autofocus="autofocus"/>
         <dv:password path="password" text="Password"/>
         <button type="submit">Register</button>

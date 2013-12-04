@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +41,12 @@ public class RegisterController {
                            BindingResult result) {
 
         if (result.hasErrors()) {
+            return "register";
+        }
+
+        if (userRepository.findUserByName(editModel.getUsername()).isPresent()) {
+            //TODO 2013-12-04 Dom - i18n this message
+            result.addError(new ObjectError("command", "Username already exists"));
             return "register";
         }
 
