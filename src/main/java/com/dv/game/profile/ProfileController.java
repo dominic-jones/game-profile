@@ -32,8 +32,10 @@ public class ProfileController {
         return "profile";
     }
 
+    //TODO 2013-12-04 Dom - Consider more robust error checking for logged-in user access
     /*
-     * For anything more complicated, should use a proper view model.
+     * Since we are logged in, we must have a user principal name, and therefore a user. If for whatever reason,
+     * we do not, this is a fatal exception. This waits until the development of global error pages.
      */
     @ModelAttribute("model")
     public ProfileViewModel model(Principal principal) {
@@ -42,10 +44,21 @@ public class ProfileController {
 
         Optional<User> optionalUser = userRepository.findUserByName(principal.getName());
 
-        //TODO 2013-12-04 Dom - Map to the view model with ModelMapper
         User user = optionalUser.get();
+
+        //TODO 2013-12-04 Dom - Map to the view model with ModelMapper
         model.setUsername(user.getUsername());
-        model.setCharacterNames(newHashSet(transform(user.getCharacters(), new Function<Character, String>() {
+
+        //Guava transformers are lazy, so a newHashSet is required to perform the copy while still in-session
+        model.setCharacterNames(newHashSet(transform(user.getCharacters(), toName())));
+
+        return model;
+    }
+
+    //Will become a lambda
+    private static Function<Character, String> toName() {
+
+        return new Function<Character, String>() {
             @Nullable
             @Override
             public String apply(@Nullable Character character) {
@@ -53,9 +66,7 @@ public class ProfileController {
                 assert character != null;
                 return character.getCharacterName();
             }
-        })));
-
-        return model;
+        };
     }
 
 }
