@@ -1,4 +1,4 @@
-package com.dv.game.test;
+package com.dv.game.profile;
 
 import com.dv.game.characters.Character;
 import com.dv.game.user.User;
@@ -18,18 +18,18 @@ import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Sets.newHashSet;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-//TODO 2013-12-04 Dom - Refactory name/paths to better match intent
 @Controller
 @Transactional(readOnly = true)
-public class TestController {
+@RequestMapping("/profile")
+public class ProfileController {
 
     @Inject
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/test", method = GET)
+    @RequestMapping(method = GET)
     public String profile() {
 
-        return "test";
+        return "profile";
     }
 
     /*

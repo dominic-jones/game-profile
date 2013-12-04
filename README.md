@@ -35,13 +35,13 @@ The default perm gen size is slightly too small, and will memory error when Spri
 *Application
 Once the Glassfish Server has started, there are three main pages in the application.
 
-https://localhost:9191/game-profile/test/test
+https://localhost:9191/game-profile/test/profile
 https://localhost:9191/game-profile/test/login
 https://localhost:9191/game-profile/test/register
 
 The application is also listening on http port 9090, but Spring Security will redirect those requests to https 9191.
 
-test/test
+test/profile
 This is a secured page, requiring the user to log in. Accessing this first will redirect to a login screen.
 
 test/login

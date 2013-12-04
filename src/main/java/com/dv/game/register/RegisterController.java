@@ -47,7 +47,7 @@ public class RegisterController {
 
         //TODO 2013-11-26 Dom - Make SpringSecurity login the user after registering (and check security implications of this)
 
-        return "redirect:test";
+        return "redirect:profile";
     }
 
     //TODO 2013-11-26 Dom - build the User better, perhaps through auto-mapper

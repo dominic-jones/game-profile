@@ -28,6 +28,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 
         ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         dispatcher.setLoadOnStartup(1);
+        //TODO 2013-12-04 Dom - Needs a better name than profile.
         dispatcher.addMapping("/test/*");
     }
 }

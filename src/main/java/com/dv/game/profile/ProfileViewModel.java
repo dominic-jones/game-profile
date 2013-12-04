@@ -1,4 +1,4 @@
-package com.dv.game.test;
+package com.dv.game.profile;
 
 public class ProfileViewModel {
 

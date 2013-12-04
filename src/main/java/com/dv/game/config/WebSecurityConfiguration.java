@@ -48,7 +48,7 @@ public class WebSecurityConfiguration
         //Define the login form, accessible by all
         http
                 .formLogin()
-                .defaultSuccessUrl("/test/test")
+                .defaultSuccessUrl("/test/profile")
                 .loginPage("/test/login")
                 .permitAll()
 
