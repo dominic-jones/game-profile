@@ -20,8 +20,6 @@ import static com.fasterxml.uuid.Generators.timeBasedGenerator;
 import static com.google.common.base.Splitter.on;
 import static com.google.common.collect.ImmutableList.copyOf;
 import static com.google.common.collect.Iterables.transform;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.DETACH;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 
