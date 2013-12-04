@@ -1,5 +1,6 @@
 package com.dv.game.user;
 
+import com.dv.game.characters.Character;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,13 +10,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.annotation.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.fasterxml.uuid.Generators.timeBasedGenerator;
 import static com.google.common.base.Splitter.on;
 import static com.google.common.collect.ImmutableList.copyOf;
 import static com.google.common.collect.Iterables.transform;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.DETACH;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
 
 @Entity
 public class User implements UserDetails {
@@ -27,6 +35,9 @@ public class User implements UserDetails {
     private String password;
     //TODO 2013-11-26 Dom - This should be a mapping to some other role Entity
     private String tempAuthorities;
+
+    @OneToMany(mappedBy = "user", cascade = {PERSIST, MERGE})
+    private Set<Character> characters = new HashSet<>();
 
     protected User() {
 
@@ -56,6 +67,11 @@ public class User implements UserDetails {
         return id;
     }
 
+    public void addCharacter(String characterName) {
+
+        characters.add(new Character(this, characterName));
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -73,6 +89,11 @@ public class User implements UserDetails {
                 return new SimpleGrantedAuthority(s);
             }
         }));
+    }
+
+    public Set<Character> getCharacters() {
+
+        return characters;
     }
 
     @Override

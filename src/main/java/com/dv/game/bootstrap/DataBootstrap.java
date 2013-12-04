@@ -53,12 +53,13 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
             return;
         }
 
-        user(systemUserName, "password", asList("ROLE_USER"));
+        User user = user(systemUserName, "password", asList("ROLE_USER"));
+        user.addCharacter("Avicus");
 
         user("admin", "password", asList("ROLE_USER", "ROLE_ADMIN"));
     }
 
-    private void user(String username,
+    private User user(String username,
                       String password,
                       Iterable<String> roles) {
 
@@ -66,6 +67,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         //TODO 2013-11-29 Dom - This should follow the exact same flow as the RegisterController.
         User user = new User(username, passwordEncoder.encode(password), authorities);
         userRepository.createUser(user);
+        return user;
     }
 
 }
