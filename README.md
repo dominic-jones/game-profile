@@ -28,10 +28,10 @@ For the purposes of a demo project, this project is entirely embedded and requir
 The default perm gen size is slightly too small, and will memory error when Spring starts classloading. It's a small app, so 128m is fine.
 
 ###Linux:
-MAVEN_OPTS="--XX:MaxPermSize=128m" mvn clean package embedded-glassfish:run
+MAVEN_OPTS="-XX:MaxPermSize=128m" mvn clean package embedded-glassfish:run
 
 ###Windows:
-set MAVEN_OPTS=--XX:MaxPermSize=128m
+set MAVEN_OPTS=-XX:MaxPermSize=128m
 mvn clean package embedded-glassfish:run
 
 ##Application
